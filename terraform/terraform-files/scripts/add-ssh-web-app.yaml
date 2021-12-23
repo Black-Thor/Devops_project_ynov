@@ -1,0 +1,18 @@
+#cloud-config
+groups :
+    - ubuntu: [root,sys]
+    - deploy
+
+users: 
+  - default
+  - name : deploy
+    gecos : deploy
+    shell : /bin/bash
+    primary-group : deploy
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    lock_passwd: false
+    ssh_authorized_keys:
+      -file(../terraform/ssh-files/project)
+
+packages:
+  - python3

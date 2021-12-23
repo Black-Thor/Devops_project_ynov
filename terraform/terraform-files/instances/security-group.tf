@@ -1,5 +1,5 @@
-resource "aws_security_group" "moustache" {
-  name        =  "moustache"
+resource "aws_security_group" "SD_devops" {
+  name        = "SD_devops"
   description = "Allow SSH inbound traffic"
   vpc_id      = "vpc-a00c78cb"
 
@@ -7,6 +7,13 @@ resource "aws_security_group" "moustache" {
     description = "SSH from VPC"
     from_port   = 22
     to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    description = "Open 8080"
+    from_port   = 8080
+    to_port     = 8080
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -24,6 +31,7 @@ resource "aws_security_group" "moustache" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
 
 
 

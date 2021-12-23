@@ -32,10 +32,3 @@ variable "ssh_key_name" {
   default     = "project.pub"
   description = "Instance ssh key name"
 }
-
-variable "instance_count" {
-  type      = number
-  default   = 1
-  description = "Instance number"
-}
-

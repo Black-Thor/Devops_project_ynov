@@ -3,3 +3,4 @@ terraform/terraform-files/instances/.terraform
 terraform/terraform-files/instances/terraform.tfstate.backup
 terraform/terraform-files/instances/terraform.tfstate
 terraform/ssh-files/terraform.tfstate
+.terraform.*

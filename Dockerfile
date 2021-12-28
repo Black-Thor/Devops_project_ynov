@@ -28,12 +28,14 @@ RUN apt-get update && \
       stable" && \
    apt-get update && \
    apt-get -y install docker-ce
-
+#installation ansible
 RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add - && apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" && apt-get update && apt-get install terraform
-
-
-
-
+#installation terraform
+RUN apt-get install python3-pip -y && \
+  pip3 install ansible
+#Installation of jq to parse terraform output
+RUN curl -o /usr/local/bin/jq http://stedolan.github.io/jq/download/linux64/jq && \
+  chmod +x /usr/local/bin/jq
 # Load plugins w jenkins-plugin-cli
 COPY --chown=jenkins:jenkins jenkins/conf/plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt

@@ -1,0 +1,10 @@
+---
+- hosts: all
+  tasks:
+    - import_role:
+        name: java
+
+    - name: Run tasks/main.yaml
+      import_role:
+        name: roles/java
+        tasks_from: main

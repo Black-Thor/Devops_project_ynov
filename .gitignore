@@ -4,3 +4,6 @@ terraform/terraform-files/instances/terraform.tfstate.backup
 terraform/terraform-files/instances/terraform.tfstate
 terraform/ssh-files/terraform.tfstate
 .terraform.*
+terraform/terraform-files/instances@tmp
+terraform/aws/credentials-ynov.txt
+

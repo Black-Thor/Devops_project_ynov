@@ -3,6 +3,8 @@ println('-----------------------------------------------------------------------
 def pipelineScript = new File('/var/jenkins_config/jobs/sb3t_wrapper.groovy').getText("UTF-8")
 println('---------------------------------------------------------------------------Import Job CD/Terraform')
 def infraBuild = new File('/var/jenkins_config/jobs/terraform.groovy').getText("UTF-8")
+def infraOutput = new File('/var/jenkins_config/jobs/terraform-output-ip.groovy').getText("UTF-8")
+
 
 pipelineJob('CI/sb3t_wrapper'){
     description("Build .jar file from sb3t repository , from master branch")
@@ -45,6 +47,15 @@ pipelineJob('CD/infraBuild'){
     definition{
         cps {
             script(infraBuild)
+            sandbox()
+        }
+    }
+}
+pipelineJob('CD/infraOutput'){
+    description("Output all ip AWS through terraform ")
+    definition{
+        cps {
+            script(infraOutput)
             sandbox()
         }
     }

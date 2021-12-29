@@ -33,9 +33,8 @@ RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add - && apt-add
 #installation terraform
 RUN apt-get install python3-pip -y && \
   pip3 install ansible
-#Installation of jq to parse terraform output
-RUN curl -o /usr/local/bin/jq http://stedolan.github.io/jq/download/linux64/jq && \
-  chmod +x /usr/local/bin/jq
+#Install LVM for lvol and lvg volumes
+RUN ansible-galaxy collection install community.general
 # Load plugins w jenkins-plugin-cli
 COPY --chown=jenkins:jenkins jenkins/conf/plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt

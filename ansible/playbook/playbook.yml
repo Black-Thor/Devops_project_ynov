@@ -1,10 +1,32 @@
 ---
-- hosts: all
+- name: playbook1
+  hosts: aws
+  become : true
   tasks:
-    - import_role:
+    - name: Install Java using Ansible
+      yum:
         name: java
+        state: present
+      vars:
+        packages:
+          - java-11-openjdk
+    - name: création de java_user
+      user:
+          name: java_user
+          state: present
+          groups: root
+          append: yes
+    - name : Téléchargement de la release 
+      get_url: 
+        url : https://github.com/Ozz007/sb3t/releases/download/1.0/sb3t-ws-1.0.jar
+        dest: "/opt"
+    # - name: Create a logical volume of 128m
+    #   community.general.lvol:
+    #     vg: firefly
+    #     lv: test
+    #     size: 128
+    - name : shell to run 
+      shell : "java -jar /opt/sb3t-ws-1.0.jar"
+       
+            
 
-    - name: Run tasks/main.yaml
-      import_role:
-        name: roles/java
-        tasks_from: main

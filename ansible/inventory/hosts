@@ -1,1 +1,2 @@
-app ansible_host=52.14.147.108 ansible_user=deploy ansible_python_interpreter=/usr/bin/python3
+[aws]
+  18.216.216.48 ansible_user=centos ansible_ssh_private_key_file=/var/terraform/ssh-files/project ansible_python_interpreter=/usr/bin/python3

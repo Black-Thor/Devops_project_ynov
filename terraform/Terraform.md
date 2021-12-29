@@ -8,3 +8,5 @@ ssh -i project centos@[ip output]]
 
 
 crée un moyen de gen un clé ssh , et l'exporter 
+
+terraform output => https://www.terraform.io/cli/commands/output 

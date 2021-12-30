@@ -5,26 +5,27 @@
   tasks:
     - name: Install Java using Ansible
       yum:
-        name: java
+        # name: java
         state: present
         name : java-11-openjdk
     - name: création de java_user
       user:
           name: java_user
           state: present
-          groups: root
+          groups: [root , ubuntu]
           append: yes
     - name : Téléchargement de la release 
       get_url: 
         url : https://github.com/Ozz007/sb3t/releases/download/1.0/sb3t-ws-1.0.jar
         dest: "/opt"
-    # - name: Create a logical volume of 128m
-    #   community.general.lvol:
-    #     vg: firefly
-    #     lv: test
-    #     size: 128
+        owner: java_user
+        group: ubuntu
+        mode: '0644'
+
     - name : shell to run 
-      shell : "java -jar /opt/sb3t-ws-1.0.jar"
+      become : false
+      become_user: deploy
+      shell : "nohup java -jar -Xmx128m /opt/sb3t-ws-1.0.jar &"
        
             
 

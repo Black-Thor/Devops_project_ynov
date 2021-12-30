@@ -1,0 +1,72 @@
+---
+ - hosts: aws
+   user: root
+   become : true 
+
+   tasks:
+        - name: vg_data volume group creation
+          lvg:
+               vg: vg_data 
+               pvs: /dev/xvdh
+               state: absent
+               force : yes
+
+
+        - name: db00 lvm creation
+          lvol:
+               vg: vg_data 
+               lv: db00
+               size: 500m
+               state: absent
+               force : yes
+
+
+        - name: db01 lvm creation
+          lvol:
+               vg: vg_data 
+               lv: db01
+               size: 500m
+               state: absent   
+               force : yes             
+
+        - name: create file system for db00
+          filesystem:
+            fstype: ext4
+            dev: /dev/vg_data/db00
+            state: absent
+            force : yes
+
+        - name: create file system for db01
+          filesystem:
+            fstype: ext4
+            dev: /dev/vg_data/db01
+            state: absent
+            force : yes
+
+        # - name: create file system for db00
+        #   mount:
+        #         path: /opt
+        #         src : /dev/xvdh
+        #         fstype: ext4
+        #         state: mounted
+                
+        # - name: create file system for db01
+        #   mount:
+        #         path: /var/log
+        #         src : /dev/xvdh
+        #         fstype: ext4
+        #         state: mounted
+
+
+        # - name: create file system for db00
+        #   filesystem:
+        #         path: /var/log
+        #         fstype: ext4
+        #         dev: /dev/vg_data/db00
+
+        # - name: create file system for db01
+        #   filesystem:
+        #         path: /var/log
+        #         fstype: ext4
+        #         dev: /dev/vg_data/db01
+

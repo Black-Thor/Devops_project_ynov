@@ -1,0 +1,15 @@
+--- # playbook  vg_data
+- name: use deploy
+  hosts: aws
+  become: true
+
+  pre_tasks:
+    - debug:
+        msg: 'Beginning disk configuration.'
+
+  roles:
+    - vg_admin
+
+  post_tasks:
+    - debug:
+        msg: 'all task as been done'

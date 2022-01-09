@@ -4,15 +4,14 @@
    become : true 
 
    tasks:
-        - name: vg_data volume group creation
+        - name: vg_data volume group destroy
           lvg:
                vg: vg_data 
                pvs: /dev/xvdh
                state: absent
                force : yes
 
-
-        - name: db00 lvm creation
+        - name: db00 lvm destroy
           lvol:
                vg: vg_data 
                lv: db00
@@ -20,8 +19,7 @@
                state: absent
                force : yes
 
-
-        - name: db01 lvm creation
+        - name: db01 lvm destroy
           lvol:
                vg: vg_data 
                lv: db01

@@ -1,0 +1,35 @@
+---
+ - hosts: aws
+   user: root
+   become : true 
+
+   tasks:
+        - yum:
+            name: 'lvm*'
+            state: present
+        - name: vg_data volume group creation
+          lvg:
+               vg: vg_data 
+               pvs: /dev/xvdh
+        - name: db00 lvm creation
+          lvol:
+               vg: vg_data 
+               lv: db00
+               size: 500m
+             
+
+        - name: db01 lvm creation
+          lvol:
+               vg: vg_data 
+               lv: db01
+               size: 500m  
+               
+        - name: create file system for db00
+          filesystem:
+            fstype: ext4
+            dev: /dev/vg_data/db00
+        - name: create file system for db01
+          filesystem:
+            fstype: ext4
+            dev: /dev/vg_data/db01
+

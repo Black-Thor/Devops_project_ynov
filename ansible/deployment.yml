@@ -1,0 +1,15 @@
+--- # resume du playbook
+- name: user deploy
+  hosts: aws
+  become: true
+
+  pre_tasks:
+    - debug:
+        msg: 'Beginning web server configuration.'
+
+  roles:
+    - deploy
+
+  post_tasks:
+    - debug:
+        msg: 'all task as been done'

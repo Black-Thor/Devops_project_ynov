@@ -2,7 +2,6 @@
 #le playbook est utlilisé dans le le deploy
 - name: playbook1 
   hosts: aws
-  become_user: deploy
   become : true
   tasks:
     - name: Install Java using Ansible

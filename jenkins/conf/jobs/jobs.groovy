@@ -7,7 +7,7 @@ def infraOutput = new File('/var/jenkins_config/jobs/terraform-output-ip.groovy'
 println('---------------------------------------------------------------------------Import Job CD/ansible')
 def ec2_inventory = new File('/var/jenkins_config/jobs/ec2_inventory.groovy').getText("UTF-8")
 def deploiement = new File('/var/jenkins_config/jobs/deploiement.groovy').getText("UTF-8")
-def destroy = new File('/var/jenkins_config/jobs/destroy-instances.groovy').getText("UTF-8")
+def destroy = new File('/var/jenkins_config/jobs/destroy_instances.groovy').getText("UTF-8")
 
 
 pipelineJob('CI/sb3t_wrapper'){

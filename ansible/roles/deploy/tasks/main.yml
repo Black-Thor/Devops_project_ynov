@@ -1,32 +1,34 @@
 ---
-#le playbook est utlilisé dans le le deploy
-- name: playbook1 
-  hosts: aws
-  become : true
-  tasks:
     - name: Install Java using Ansible
       yum:
         # name: java
         state: present
-        name : java-11-openjdk
-    - name: création de java_user
+        update_cache: yes
+        #name : openjdk-11-jdk #pour ubuntu
+        name : java-11-openjdk #pour centos
+
+    - name: création groupe java 
+      group:
+          name: java_user
+          state: present
+    - name : user creation 
       user:
           name: java_user
           state: present
-          groups: [root , ubuntu]
+          group: java_user
+          password: password #to change 
           append: yes
+      
     - name : Téléchargement de la release 
       get_url: 
         url : https://github.com/Ozz007/sb3t/releases/download/1.0/sb3t-ws-1.0.jar
         dest: "/opt"
         owner: java_user
-        group: ubuntu
+        group: java_user
         mode: '0644'
 
     - name : shell to run 
-      become : false
-      become_user: deploy
+      become_user: java_user
       shell : "nohup java -jar -Xmx128m /opt/sb3t-ws-1.0.jar &"
+    
        
-            
-

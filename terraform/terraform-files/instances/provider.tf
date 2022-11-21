@@ -17,6 +17,6 @@ terraform {
 provider "aws" {
   profile = "default"
   region = "us-east-2"
-  shared_credentials_file = "../../aws/credentials-ynov.txt"
+  shared_credentials_file = "../../aws/key.txt"
 }
 

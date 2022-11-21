@@ -1,7 +1,7 @@
 resource "aws_security_group" "SD_devops" {
   name        = "SD_devops"
   description = "Allow SSH inbound traffic"
-  vpc_id      = "vpc-a00c78cb"
+  vpc_id      = "vpc-74da7a1f"
 
   ingress {
     description = "SSH from VPC"
@@ -31,10 +31,7 @@ resource "aws_security_group" "SD_devops" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
-
-
-
+  
   lifecycle {
     create_before_destroy = true
   }
